@@ -89,7 +89,7 @@ SELECT *
 FROM planes
     NATURAL JOIN plane_models
     NATURAL JOIN (
-        SELECT reg, sum((julianday(ATA) - julianday(STD)) * 24 * 60) AS flying_time
+        SELECT reg, round(sum((julianday(ATA) - julianday(STD)) * 24 * 60)) AS flying_time_min
         FROM legs 
         GROUP BY reg
     );

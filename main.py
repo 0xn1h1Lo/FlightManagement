@@ -7,7 +7,7 @@ from queries import query_info_planes
 
 # Helpers
 def check_valid_name(string):
-    if not all(c.isidentifier() for c in string):
+    if not string.isidentifier():
         print("Invalid Input")
         raise ValueError("The column name characters are alphanumerical and '_'")
     
@@ -124,6 +124,7 @@ def extra_queries_submenu(db):
     print(" *******************")
     print(" 01. Detailed information on the pilots")
     print(" 02. Movement report by airport")
+    print(" 03. Flight time for each plane")
     print()
 
     __choose_submenu = int(input("> Enter your choice. Number: "))
@@ -132,6 +133,8 @@ def extra_queries_submenu(db):
             db.run_command(query_info_pilots)
         case 2:
             db.run_command(query_mvt_airports)
+        case 3:
+            db.run_command(query_info_planes)
         case _:
             print("Invalid Choice")
             return 1
@@ -161,8 +164,8 @@ def admin_submenu(db):
     print(" ****************")
     print(" 01. Drop a table or a view")
     print(" 02. Run a one-liner SQL query")
-    print(" 03. Turn off foreign keys constraints")
-    print(" 04. Turn on foreign keys constraints (default)")
+    print(" 03. Turn off foreign key constraints")
+    print(" 04. Turn on foreign key constraints (default)")
     print()
 
     __choose_submenu = int(input("> Enter your choice. Number: "))

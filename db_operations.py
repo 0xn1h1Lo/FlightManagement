@@ -107,6 +107,10 @@ class DBOperations:
     @db_operation
     def run_command(self, command):
         self.cursor.execute(command)
-        headers = [element[0] for element in self.cursor.description]
-        results = self.cursor.fetchall()
-        db_objects.pprint_table(results, headers)
+        if self.cursor.description is not None:
+            headers = [element[0] for element in self.cursor.description]
+            results = self.cursor.fetchall()
+            db_objects.pprint_table(results, headers)
+        else:
+            self.conn.commit()
+            print("Success!")
